@@ -74,10 +74,17 @@ public class FlashCardBuilder {
 		frame.setVisible(true);
 	}
 	
+	private void clearCard() {
+		questionArea.setText("");
+		answerArea.setText("");
+		questionArea.requestFocus();
+	}
+	
 	public class NextCardListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			FlashCard card = new FlashCard(questionArea.getText(), answerArea.getText());
 			cardList.add(card);
+			clearCard();
 		}
 	}
 	
@@ -112,12 +119,6 @@ public class FlashCardBuilder {
 		public void actionPerformed(ActionEvent e) {
 			cardList.clear();
 			clearCard();
-		}
-		
-		private void clearCard() {
-			questionArea.setText("");
-			answerArea.setText("");
-			questionArea.requestFocus();
 		}
 	}
 }
