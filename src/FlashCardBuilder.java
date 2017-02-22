@@ -9,6 +9,7 @@ import java.io.*;
 public class FlashCardBuilder {
 	
 	private JFrame frame;
+	private JPanel playerPanel;
 	private JTextArea questionArea;
 	private JTextArea answerArea;
 	private ArrayList<FlashCard> cardList;
@@ -68,8 +69,18 @@ public class FlashCardBuilder {
 		fileMenu.add(saveMenuItem);
 		menuBar.add(fileMenu);
 		
+		JMenu playerMenu = new JMenu("Player");
+		menuBar.add(playerMenu);
+		JMenuItem playerMenuItem = new JMenuItem("Play");
+		playerMenu.add(playerMenuItem);
+		playerMenuItem.addActionListener(new PlayMenuListener());
+				
+		playerPanel = new JPanel();
+		JLabel playerLabel = new JLabel("This is where the player could have been. Demonstration purposes only. Need to change File menu items");
+		playerPanel.add(playerLabel);
+		
 		frame.setJMenuBar(menuBar);
-		frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
+		frame.setContentPane(mainPanel);
 		frame.setSize(500, 600);
 		frame.setVisible(true);
 	}
@@ -78,6 +89,14 @@ public class FlashCardBuilder {
 		questionArea.setText("");
 		answerArea.setText("");
 		questionArea.requestFocus();
+	}
+	
+	public class PlayMenuListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.setContentPane(playerPanel);
+			frame.setSize(500, 600);
+			frame.setVisible(true);
+		}
 	}
 	
 	public class NextCardListener implements ActionListener {
